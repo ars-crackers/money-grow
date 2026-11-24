@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Financial Money Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F0E6; --paper-deep:#ECE6D6;
+    --ink:#16302A; --ink-soft:#42554E;
+    --green:#2F7A55; --green-deep:#1E5C3E;
+    --brass:#B98A3C; --brass-soft:#E4CF9F;
+    --coral:#CE5034; --blue:#2C5E97;
+    --line:#D6CDB8; --dot:#CBC0A6;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;margin:0;overflow:hidden;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    background-image:radial-gradient(var(--dot) 1px,transparent 1px);
+    background-size:24px 24px;background-position:-12px -12px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.1;margin:0;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  .tamil{color:var(--brass);font-weight:500;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--green-deep);}
+
+  /* ===== book frame ===== */
+  .book{position:fixed;inset:0;overflow:hidden;}
+  .pages{display:flex;height:100%;width:100%;
+    transition:transform .5s cubic-bezier(.5,.05,.2,1);will-change:transform;}
+  .page{flex:0 0 100%;height:100%;overflow-y:auto;overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;position:relative;padding:46px 22px 96px;}
+  .page::before{content:"";position:absolute;top:0;bottom:0;left:0;width:18px;
+    background:linear-gradient(90deg,rgba(22,48,42,.07),transparent);pointer-events:none;}
+  .sheet{max-width:600px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;}
+
+  /* entrance animation per active page */
+  .anim{opacity:0;transform:translateY(14px);}
+  .page.active .anim{animation:rise .6s cubic-bezier(.2,1,.3,1) forwards;}
+  .page.active .anim:nth-child(2){animation-delay:.06s;}
+  .page.active .anim:nth-child(3){animation-delay:.12s;}
+  .page.active .anim:nth-child(4){animation-delay:.18s;}
+  .page.active .anim:nth-child(5){animation-delay:.24s;}
+  .page.active .anim:nth-child(6){animation-delay:.30s;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  .chap-tag{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--green-deep);border:1px solid var(--line);
+    border-radius:30px;padding:4px 12px;display:inline-block;}
+  .chap-num{font-family:"Fraunces",serif;font-size:3.2rem;color:var(--brass);line-height:1;margin:18px 0 6px;}
+  .chap-title{font-size:1.85rem;letter-spacing:-.01em;}
+  .chap-title .tamil{display:block;font-size:.5em;font-family:"IBM Plex Sans",sans-serif;margin-top:8px;}
+  .chap-lead{color:var(--ink-soft);font-size:.96rem;margin:14px 0 22px;}
+
+  /* ===== expandable sub-topics ===== */
+  .topic{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:15px;
+    padding:16px 18px;margin-bottom:12px;cursor:pointer;transition:border-color .2s ease;}
+  .topic:hover{border-color:var(--brass);}
+  .topic-head{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .topic-head h4{font-family:"IBM Plex Sans",sans-serif;font-size:1.04rem;font-weight:600;}
+  .topic-head h4 .ta{color:var(--brass);font-weight:500;font-size:.82em;margin-left:6px;}
+  .plus{flex:0 0 auto;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--brass);
+    color:var(--brass);display:grid;place-items:center;font-size:1.25rem;line-height:1;
+    transition:transform .3s ease,background .2s ease;font-family:"IBM Plex Sans",sans-serif;}
+  .topic.open .plus{transform:rotate(135deg);background:var(--brass);color:#fff;}
+  .topic-sub{margin:8px 0 0;font-size:.9rem;color:var(--ink-soft);}
+  .topic .rate{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--green-deep);
+    font-weight:600;margin-top:8px;display:inline-block;}
+  .topic.warn .plus{border-color:var(--coral);color:var(--coral);}
+  .topic.warn.open .plus{background:var(--coral);}
+  .topic.warn .rate{color:var(--coral);}
+  .more{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .topic.open .more{max-height:360px;}
+  .more-inner{padding-top:12px;margin-top:12px;border-top:1px dashed var(--line);
+    font-size:.9rem;color:var(--ink-soft);line-height:1.55;}
+  .more-inner b{color:var(--ink);}
+
+  /* RDPD callout */
+  .rdpd{background:#1B3A33;border-left:4px solid var(--brass);border-radius:13px;
+    padding:16px 18px;margin:6px 0 4px;color:#E7E2D4;}
+  .rdpd .k{font-family:"IBM Plex Mono",monospace;color:var(--brass);font-size:.66rem;
+    letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:7px;}
+  .rdpd .k::before{content:"\1F4D5  ";}
+  .rdpd .k small{color:#9FB0A8;letter-spacing:.06em;}
+  .rdpd p{margin:0;font-size:.92rem;line-height:1.5;}
+  .rdpd b{color:#fff;}
+
+  /* ===== cover ===== */
+  .cover{justify-content:center;text-align:center;gap:0;}
+  .cover .crest{width:64px;height:64px;border:2px solid var(--brass);border-radius:50%;
+    display:grid;place-items:center;margin:0 auto 26px;color:var(--brass);font-size:1.7rem;}
+  .cover h1{font-size:clamp(2.6rem,9vw,3.4rem);letter-spacing:-.02em;}
+  .cover h1 em{font-style:italic;color:var(--brass);}
+  .cover .tamil{display:block;margin-top:14px;font-size:1rem;}
+  .cover p{color:var(--ink-soft);margin:22px auto 0;max-width:34ch;font-size:1rem;}
+  .cover .hint{margin-top:40px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);}
+  .cover .hint span{display:inline-block;animation:nudge 1.6s ease-in-out infinite;}
+  @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(7px);}}
+
+  /* ===== cashflow quadrant ===== */
+  .attrib{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.08em;
+    color:var(--brass);margin:6px 0 16px;}
+  .quad{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+  .q-cell{border-radius:13px;padding:14px;color:#fff;position:relative;min-height:104px;
+    display:flex;flex-direction:column;justify-content:space-between;}
+  .q-cell.left{background:#9C4631;}   /* active income */
+  .q-cell.right{background:#1E5C3E;}  /* money works for you */
+  .q-cell .L{font-family:"Fraunces",serif;font-size:2.1rem;line-height:1;}
+  .q-cell .nm{font-weight:600;font-size:.9rem;margin-top:2px;}
+  .q-cell .ln{font-size:.74rem;opacity:.9;margin-top:6px;line-height:1.35;}
+  .q-key{display:flex;gap:8px;margin:4px 0 18px;font-size:.74rem;}
+  .q-key div{flex:1;border-radius:10px;padding:9px 11px;line-height:1.35;}
+  .q-key .kl{background:#F3E2DC;color:#9C4631;}
+  .q-key .kr{background:#DCEAE0;color:#1E5C3E;}
+  .q-key b{display:block;font-size:.78rem;}
+  /* per-quadrant detail row */
+  .qd{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:14px;
+    padding:14px 16px;margin-bottom:10px;display:flex;gap:14px;}
+  .qd .badge{flex:0 0 38px;height:38px;border-radius:10px;display:grid;place-items:center;
+    font-family:"Fraunces",serif;font-size:1.4rem;color:#fff;}
+  .qd.left .badge{background:#9C4631;} .qd.right .badge{background:#1E5C3E;}
+  .qd h4{font-family:"IBM Plex Sans",sans-serif;font-size:1rem;font-weight:600;margin-bottom:3px;}
+  .qd h4 span{font-weight:400;color:var(--ink-soft);font-size:.82em;}
+  .qd p{margin:0 0 8px;font-size:.86rem;color:var(--ink-soft);line-height:1.45;}
+  .qd .ex{display:flex;flex-wrap:wrap;gap:6px;}
+  .qd .ex b{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--green-deep);width:100%;margin-bottom:1px;}
+  .qd .chip{font-size:.74rem;background:var(--paper-deep);border:1px solid var(--line);
+    border-radius:20px;padding:3px 10px;color:var(--ink);}
+
+  /* ===== in-focus / your own notes ===== */
+  .spotlight .eyebrow{color:var(--brass);}
+  .focus-badge{display:inline-flex;align-items:center;gap:7px;background:#FFF7DD;
+    border:1px solid #E6CF7A;color:#8A6A1E;border-radius:30px;padding:5px 13px;
+    font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:14px;}
+  .mynote{display:flex;gap:0;border:1px solid var(--line);border-left:4px solid var(--brass);
+    border-radius:13px;overflow:hidden;margin-bottom:9px;background:rgba(255,255,255,.65);}
+  .mynote .role{flex:0 0 41%;padding:13px 14px;background:#E7EFF4;}
+  .mynote .role .r{font-weight:700;font-size:.98rem;}
+  .mynote .role .tag{display:inline-block;margin-top:4px;color:var(--coral);font-weight:600;font-size:.8rem;}
+  .mynote .desc{flex:1;padding:13px 14px;display:flex;align-items:center;
+    font-size:.86rem;color:var(--ink-soft);line-height:1.4;}
+  .checklist{background:#E7EFF4;border:1px solid #BcD2DD;border-radius:14px;
+    padding:16px 18px;margin-top:16px;}
+  .checklist h4{font-family:"Fraunces",serif;font-size:1.1rem;margin-bottom:3px;}
+  .checklist .cap{font-size:.78rem;color:var(--ink-soft);margin-bottom:12px;}
+  .checklist ol{margin:0;padding:0;list-style:none;display:grid;gap:9px;}
+  .checklist li{display:flex;gap:11px;align-items:center;font-size:.9rem;font-weight:500;}
+  .checklist li .no{flex:0 0 26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;
+    display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:.8rem;}
+  .focus-foot{font-size:.78rem;color:var(--ink-soft);margin-top:16px;
+    border-top:1px dashed var(--line);padding-top:12px;}
+
+  /* ===== inline illustrations ===== */
+  .illus{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:14px;
+    padding:14px 14px 9px;margin-bottom:18px;}
+  .illus svg{display:block;width:100%;height:auto;max-height:140px;}
+  .illus .cap{text-align:center;font-size:.72rem;color:var(--ink-soft);
+    font-family:"IBM Plex Mono",monospace;letter-spacing:.03em;margin-top:8px;}
+
+  /* ===== contents ===== */
+  .toc h2{font-size:1.7rem;margin-bottom:4px;}
+  .toc .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:22px;}
+  .toc-item{display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+    background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:13px;
+    padding:14px 16px;margin-bottom:10px;cursor:pointer;font:inherit;color:inherit;
+    transition:transform .2s ease,border-color .2s ease;}
+  .toc-item:hover{transform:translateX(4px);border-color:var(--brass);}
+  .toc-item .n{font-family:"Fraunces",serif;font-size:1.3rem;color:var(--brass);width:30px;}
+  .toc-item .t{font-weight:600;font-size:1rem;}
+  .toc-item .t small{display:block;font-weight:400;color:var(--ink-soft);font-size:.78rem;}
+  .toc-item .go{margin-left:auto;color:var(--blue);font-size:1.1rem;}
+
+  /* ===== chart ===== */
+  .chart .bars{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+  .bar-row{display:grid;grid-template-columns:1fr;gap:5px;}
+  .bar-top{display:flex;justify-content:space-between;align-items:baseline;}
+  .bar-top .nm{font-size:.86rem;font-weight:500;}
+  .bar-top .vl{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.84rem;}
+  .track{position:relative;height:22px;background:var(--paper-deep);border-radius:6px;overflow:hidden;}
+  .infl{position:absolute;top:-3px;bottom:-3px;left:42.8%;border-left:2px dashed var(--coral);z-index:2;}
+  .fill{height:100%;width:0;border-radius:6px;transition:width 1s cubic-bezier(.22,1,.36,1);}
+  .fill.below{background:linear-gradient(90deg,#E08368,var(--coral));}
+  .fill.above{background:linear-gradient(90deg,#4FA178,var(--green));}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.78rem;color:var(--ink-soft);margin:4px 0 14px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .sw{width:12px;height:12px;border-radius:3px;}
+  .note{font-size:.78rem;color:var(--ink-soft);border-top:1px dashed var(--line);
+    padding-top:12px;margin-top:16px;}
+
+  /* ===== schedule ===== */
+  .week{display:flex;gap:16px;background:rgba(255,255,255,.5);border:1px solid var(--line);
+    border-radius:13px;padding:14px 16px;margin-bottom:10px;}
+  .week .wn{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;
+    color:var(--green-deep);text-transform:uppercase;flex:0 0 54px;}
+  .week .wn b{display:block;font-family:"Fraunces",serif;font-size:1.4rem;color:var(--ink);margin-top:2px;}
+  .week h4{font-family:"Fraunces",serif;font-size:1.08rem;margin-bottom:3px;}
+  .week p{margin:0;font-size:.85rem;color:var(--ink-soft);}
+
+  /* ===== practice ===== */
+  .practice .hd{font-size:.92rem;color:var(--ink-soft);margin-bottom:18px;}
+  .flipgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .flip{perspective:900px;height:120px;cursor:pointer;}
+  .flip-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+  .flip.open .flip-in{transform:rotateY(180deg);}
+  .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:14px;padding:14px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);}
+  .front{background:var(--ink);color:var(--brass-soft);text-align:center;}
+  .front .w{font-family:"Fraunces",serif;font-size:1.15rem;color:#fff;}
+  .front .tap{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.12em;
+    text-transform:uppercase;color:#8aa39a;margin-top:8px;}
+  .back{background:rgba(255,255,255,.85);transform:rotateY(180deg);}
+  .back p{margin:0;font-size:.82rem;color:var(--ink-soft);line-height:1.45;}
+  .back .w{font-family:"IBM Plex Sans",sans-serif;font-weight:600;font-size:.8rem;color:var(--green-deep);margin-bottom:5px;}
+
+  .useit{margin-top:24px;}
+  .useit h3{font-size:1.25rem;margin-bottom:4px;}
+  .useit .lead{font-size:.88rem;color:var(--ink-soft);margin-bottom:14px;}
+  .q{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:13px;
+    padding:14px 16px;margin-bottom:10px;cursor:pointer;}
+  .q .ask{font-size:.92rem;font-weight:500;}
+  .q .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;
+    font-size:.86rem;color:var(--green-deep);}
+  .q.open .ans{max-height:120px;margin-top:10px;}
+  .q .ans b{color:var(--ink);}
+  .q .reveal{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--brass);margin-top:8px;display:inline-block;}
+  .q.open .reveal{display:none;}
+
+  /* ===== closing ===== */
+  .closing{justify-content:center;text-align:center;}
+  .closing .r72{background:var(--ink);color:#F4F0E6;border-radius:18px;padding:26px 24px;margin-bottom:22px;}
+  .closing .r72 .big{font-family:"Fraunces",serif;font-size:1.5rem;color:var(--brass-soft);}
+  .closing .r72 small{display:block;font-family:"IBM Plex Mono",monospace;font-size:.7rem;
+    color:#c9c3b3;letter-spacing:.08em;margin-top:8px;}
+  .closing p{font-size:.8rem;color:var(--ink-soft);max-width:42ch;margin:0 auto;}
+  .restart{margin-top:22px;background:none;border:1.5px solid var(--brass);color:var(--green-deep);
+    border-radius:30px;padding:11px 22px;font:inherit;font-weight:600;cursor:pointer;}
+
+  /* ===== nav / pager ===== */
+  .nav{position:fixed;bottom:26px;width:46px;height:46px;border-radius:50%;
+    background:var(--ink);color:#fff;border:none;font-size:1.5rem;line-height:1;cursor:pointer;
+    display:grid;place-items:center;z-index:20;box-shadow:0 8px 20px -8px rgba(22,48,42,.6);
+    transition:opacity .25s ease,transform .15s ease;}
+  .nav:active{transform:scale(.92);}
+  .nav.prev{left:20px;} .nav.next{right:20px;}
+  .nav[disabled]{opacity:.28;pointer-events:none;}
+  .pager{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);z-index:20;
+    display:flex;align-items:center;gap:7px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--line);border:none;cursor:pointer;
+    transition:all .25s ease;padding:0;}
+  .dot.on{background:var(--brass);width:22px;border-radius:5px;}
+  .pgnum{position:fixed;top:18px;right:20px;font-family:"IBM Plex Mono",monospace;
+    font-size:.72rem;color:var(--ink-soft);z-index:20;}
+
+  @media(max-width:380px){.flipgrid{grid-template-columns:1fr;}.flip{height:104px;}}
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.08s!important;}
+    .anim{opacity:1;transform:none;}
+  }
+  .nav:focus-visible,.topic:focus-visible,.flip:focus-visible,.toc-item:focus-visible,.dot:focus-visible{
+    outline:3px solid var(--brass);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div class="pgnum" id="pgnum">01 / 11</div>
+
+<div class="book" id="book">
+  <div class="pages" id="pages">
+
+    <!-- 1 · COVER -->
+    <article class="page cover active">
+      <div class="sheet" style="justify-content:center">
+        <div class="crest anim">₹</div>
+        <h1 class="anim">How Money <em>Works</em></h1>
+        <span class="tamil anim">பணம் எப்படி இயங்குகிறது &amp; வளர்கிறது</span>
+        <p class="anim">A pocket book on the forces that shape every rupee — and the tools that grow it.</p>
+        <div class="hint anim">Swipe to read <span>→</span></div>
+      </div>
+    </article>
+
+    <!-- 2 · CONTENTS -->
+    <article class="page toc">
+      <div class="sheet">
+        <div class="eyebrow anim">Contents · பொருளடக்கம்</div>
+        <h2 class="anim" style="margin-top:8px">What's inside</h2>
+        <p class="sub anim">Tap a chapter to jump, or swipe through in order.</p>
+        <button class="toc-item anim" data-goto="2"><span class="n">01</span><span class="t">Compounding &amp; Inflation<small>The two forces</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="3"><span class="n">02</span><span class="t">Saving &amp; Investment<small>Two ways to hold money</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="4"><span class="n">03</span><span class="t">Saving &amp; Investment types<small>The toolbox</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="5"><span class="n">04</span><span class="t">The Cashflow Quadrant<small>E · S · B · I — Kiyosaki</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="6"><span class="n" style="color:var(--coral)">★</span><span class="t">In focus — your own notes<small>The quadrant in your words</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="7"><span class="n">05</span><span class="t">Growth rate chart<small>What beats inflation</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="8"><span class="n">06</span><span class="t">6-week schedule<small>Learn it properly</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="9"><span class="n">07</span><span class="t">Practice words<small>Flip cards &amp; use them</small></span><span class="go">→</span></button>
+      </div>
+    </article>
+
+    <!-- 3 · CH 01 -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">The two forces</span>
+        <div class="chap-num anim">01</div>
+        <h3 class="chap-title anim">Compounding &amp; Inflation<span class="tamil">கூட்டு வளர்ச்சி &amp; பணவீக்கம்</span></h3>
+        <p class="chap-lead anim">One force quietly grows your money; the other quietly shrinks it. Tap + to open each.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 132" role="img" aria-label="Compounding curve rising while an inflation line falls">
+            <line x1="14" y1="116" x2="306" y2="116" stroke="#D6CDB8" stroke-width="1.5"/>
+            <path d="M14,116 C120,114 188,106 228,78 C262,54 284,28 300,14" fill="none" stroke="#B98A3C" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M300,14 l-10,3 m10,-3 l-3,10" fill="none" stroke="#B98A3C" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M14,60 C100,72 200,92 304,108" fill="none" stroke="#CE5034" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round"/>
+            <path d="M304,108 l-9,-5 m9,5 l-5,9" fill="none" stroke="#CE5034" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="20" cy="116" r="7" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
+            <circle cx="20" cy="116" r="2.4" fill="#B98A3C"/>
+            <text x="226" y="38" font-size="11" fill="#1E5C3E" font-family="monospace">Compounding ↑</text>
+            <text x="64" y="64" font-size="11" fill="#CE5034" font-family="monospace">Inflation ↓</text>
+          </svg>
+          <div class="cap">Same money, two directions — over time</div>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Compounding effect <span class="ta">கூட்டு வளர்ச்சி</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">Returns that earn their own returns.</p>
+          <div class="more"><div class="more-inner">Time is the biggest lever — starting early beats investing more later. Small, regular amounts snowball: <b>₹5,000/month at 12% for 20 years ≈ ₹50 lakh</b>, of which most is growth, not your deposits.</div></div>
+          <span class="rate">Your friend ↑</span>
+        </div>
+
+        <div class="topic warn anim" tabindex="0">
+          <div class="topic-head"><h4>Inflation <span class="ta">பணவீக்கம்</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">The yearly rise in prices, ~6% in India.</p>
+          <div class="more"><div class="more-inner">₹100 today buys less in 10 years. Money left idle loses value silently. <b>Real return = your return − inflation</b> — a 7% FD against 6% inflation is only 1% of real growth.</div></div>
+          <span class="rate">Your tax ↓</span>
+        </div>
+
+        <div class="rdpd anim">
+          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
+          <p><b>Make money work for you.</b> Most people work for money for life; the shift is building money that earns while you sleep — exactly the compounding cashflow above.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 · CH 02 -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">Two ways to hold money</span>
+        <div class="chap-num anim">02</div>
+        <h3 class="chap-title anim">Saving &amp; Investment<span class="tamil">சேமிப்பு &amp; முதலீடு</span></h3>
+        <p class="chap-lead anim">Saving keeps money safe and ready; investing puts it to work. You need both, in order.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 132" role="img" aria-label="A piggy bank for saving and a growing plant for investing">
+            <!-- piggy bank (save) -->
+            <ellipse cx="78" cy="78" rx="48" ry="34" fill="#E7EFF4" stroke="#2C5E97" stroke-width="2.5"/>
+            <path d="M48,52 q8,-14 22,-8" fill="none" stroke="#2C5E97" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="66" y="44" width="22" height="5" rx="2.5" fill="#2C5E97"/>
+            <circle cx="98" cy="70" r="3" fill="#2C5E97"/>
+            <rect x="44" y="106" width="9" height="12" rx="3" fill="#2C5E97"/>
+            <rect x="104" y="106" width="9" height="12" rx="3" fill="#2C5E97"/>
+            <circle cx="77" cy="24" r="9" fill="#E4CF9F" stroke="#B98A3C" stroke-width="2"/>
+            <text x="73" y="28" font-size="10" fill="#B98A3C" font-family="monospace">₹</text>
+            <text x="56" y="128" font-size="10" fill="#2C5E97" font-family="monospace">SAVE</text>
+            <!-- divider arrow -->
+            <path d="M138,70 h44 m0,0 l-9,-6 m9,6 l-9,6" fill="none" stroke="#B98A3C" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- plant (invest) -->
+            <path d="M214,118 h64 l-8,-26 h-48 z" fill="#E7EFF4" stroke="#1E5C3E" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M246,92 C246,72 246,58 246,44" fill="none" stroke="#1E5C3E" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M246,64 C232,58 224,46 226,34 C240,36 248,48 246,64 Z" fill="#2F7A55" stroke="#1E5C3E" stroke-width="1.5"/>
+            <path d="M246,52 C260,46 270,36 268,26 C254,28 246,38 246,52 Z" fill="#4FA178" stroke="#1E5C3E" stroke-width="1.5"/>
+            <circle cx="246" cy="30" r="6" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
+            <text x="232" y="128" font-size="10" fill="#1E5C3E" font-family="monospace">INVEST</text>
+          </svg>
+          <div class="cap">Park it safely · then let it grow</div>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Saving <span class="ta">சேமிப்பு</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">Money set aside for safety and quick access.</p>
+          <div class="more"><div class="more-inner">Low risk, low return. Build an <b>emergency fund of 6 months' expenses</b> here before investing a single rupee — so you never have to sell investments at a bad time.</div></div>
+          <span class="rate">Safety first</span>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Investment <span class="ta">முதலீடு</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">Money put to work for growth.</p>
+          <div class="more"><div class="more-inner">Accepts some risk for higher return over a long horizon. This is where compounding does its heavy lifting. <b>Save first, then invest the surplus.</b></div></div>
+          <span class="rate">Growth engine</span>
+        </div>
+
+        <div class="rdpd anim">
+          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
+          <p><b>Assets vs liabilities — judged by cashflow.</b> An asset puts cashflow <b>into</b> your pocket; a liability takes it <b>out</b>. Fund your assets before expenses — pay yourself first.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 · CH 03 -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">The toolbox</span>
+        <div class="chap-num anim">03</div>
+        <h3 class="chap-title anim">Saving &amp; Investment types<span class="tamil">வகைகள்</span></h3>
+        <p class="chap-lead anim">The instruments, with typical long-term Indian returns. Tap + for where each fits.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 132" role="img" aria-label="Stacked coins growing into a rising bar chart">
+            <line x1="14" y1="116" x2="306" y2="116" stroke="#D6CDB8" stroke-width="1.5"/>
+            <!-- coin stacks (left, safe) -->
+            <g stroke="#B98A3C" stroke-width="1.6">
+              <ellipse cx="44" cy="110" rx="22" ry="7" fill="#E4CF9F"/>
+              <ellipse cx="44" cy="101" rx="22" ry="7" fill="#EAD7A3"/>
+              <ellipse cx="44" cy="92" rx="22" ry="7" fill="#E4CF9F"/>
+            </g>
+            <text x="40" y="97" font-size="11" fill="#8A6A1E" font-family="monospace">₹</text>
+            <!-- rising bars (right, growth) -->
+            <rect x="120" y="86" width="26" height="30" rx="3" fill="#BcD8C6" stroke="#1E5C3E" stroke-width="1.5"/>
+            <rect x="156" y="68" width="26" height="48" rx="3" fill="#7FB89A" stroke="#1E5C3E" stroke-width="1.5"/>
+            <rect x="192" y="46" width="26" height="70" rx="3" fill="#4FA178" stroke="#1E5C3E" stroke-width="1.5"/>
+            <rect x="228" y="26" width="26" height="90" rx="3" fill="#2F7A55" stroke="#1E5C3E" stroke-width="1.5"/>
+            <!-- growth arrow -->
+            <path d="M120,80 C160,70 210,46 262,18" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M262,18 l-10,2 m10,-2 l-2,10" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
+            <text x="118" y="130" font-size="10" fill="#1E5C3E" font-family="monospace">SAFE → GROWTH</text>
+          </svg>
+          <div class="cap">From safe coins to higher-growth instruments</div>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Savings &amp; FD / RD / PPF</h4><span class="plus">+</span></div>
+          <p class="topic-sub">The safe column — protect, don't grow.</p>
+          <div class="more"><div class="more-inner"><b>Savings a/c ~3%</b> (fully liquid) · <b>FD/RD ~7%</b> (locked, guaranteed) · <b>PPF ~7.1%</b> (tax-free, 15 yr). Ideal for emergency funds and short goals.</div></div>
+          <span class="rate">~3–7% p.a.</span>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Gold / SGB &amp; Real estate</h4><span class="plus">+</span></div>
+          <p class="topic-sub">Inflation hedges, slower to sell.</p>
+          <div class="more"><div class="more-inner"><b>Gold / Sovereign Gold Bonds ~8–10%</b> (SGB adds interest on top of price). <b>Real estate ~8–10%</b> but illiquid and lumpy. Good diversifiers, not your only engine.</div></div>
+          <span class="rate">~8–10% p.a.</span>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Mutual funds / SIP &amp; Equity</h4><span class="plus">+</span></div>
+          <p class="topic-sub">The growth engine — highest long-run return.</p>
+          <div class="more"><div class="more-inner"><b>SIP / mutual funds ~10–12%</b> (a monthly SIP automates compounding). <b>Index funds &amp; equity ~12%+</b> — highest growth, highest swings, needs a long horizon.</div></div>
+          <span class="rate">~10–12%+ p.a.</span>
+        </div>
+
+        <div class="rdpd anim">
+          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
+          <p><b>Build your asset column → escape the rat race.</b> When cashflow from assets covers your monthly expenses, you no longer depend on a paycheck. That point is financial freedom.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6 · CH 04 · CASHFLOW QUADRANT -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">The big picture</span>
+        <div class="chap-num anim">04</div>
+        <h3 class="chap-title anim">The Cashflow Quadrant<span class="tamil">பணப்புழக்க கட்டம்</span></h3>
+        <p class="attrib anim">📕 From Rich Dad's Cashflow Quadrant · Robert Kiyosaki</p>
+        <p class="chap-lead anim" style="margin-top:0">There are only 4 ways money comes to you. The letters E-S-B-I show <b>where</b> your income comes from.</p>
+
+        <div class="quad anim">
+          <div class="q-cell left"><span class="L">E</span><div><div class="nm">Employee</div><div class="ln">You have a job — you work for money.</div></div></div>
+          <div class="q-cell right"><span class="L">B</span><div><div class="nm">Business owner</div><div class="ln">You own a system that works for you.</div></div></div>
+          <div class="q-cell left"><span class="L">S</span><div><div class="nm">Self-employed</div><div class="ln">You own a job — you are the business.</div></div></div>
+          <div class="q-cell right"><span class="L">I</span><div><div class="nm">Investor</div><div class="ln">Money works for you.</div></div></div>
+        </div>
+        <div class="q-key anim">
+          <div class="kl"><b>Left (E · S)</b>You work for money — active income. Stop working, income stops.</div>
+          <div class="kr"><b>Right (B · I)</b>Money &amp; systems work for you — can earn while you sleep.</div>
+        </div>
+
+        <div class="qd left anim"><div class="badge">E</div><div>
+          <h4>Employee <span>· You have a job</span></h4>
+          <p>Trade time for a steady salary and security. Income stops the day you stop working.</p>
+          <div class="ex"><b>Conventional examples</b>
+            <span class="chip">Software engineer</span><span class="chip">Govt school teacher</span><span class="chip">Bank clerk</span><span class="chip">Nurse</span></div>
+        </div></div>
+
+        <div class="qd left anim"><div class="badge">S</div><div>
+          <h4>Self-employed <span>· You own a job</span></h4>
+          <p>You <b>are</b> the business — more control, but if you stop, the income stops too.</p>
+          <div class="ex"><b>Conventional examples</b>
+            <span class="chip">Doctor with own clinic</span><span class="chip">Freelance designer</span><span class="chip">Shop owner</span><span class="chip">Tuition teacher</span></div>
+        </div></div>
+
+        <div class="qd right anim"><div class="badge">B</div><div>
+          <h4>Business owner <span>· A system works for you</span></h4>
+          <p>Others run the system. It keeps earning even when you are not there.</p>
+          <div class="ex"><b>Conventional examples</b>
+            <span class="chip">Restaurant with staff</span><span class="chip">Franchise outlet</span><span class="chip">Factory owner</span><span class="chip">Company with employees</span></div>
+        </div></div>
+
+        <div class="qd right anim"><div class="badge">I</div><div>
+          <h4>Investor <span>· Money works for you</span></h4>
+          <p>Your money earns more money. This is the asset column from the last chapter.</p>
+          <div class="ex"><b>Conventional examples</b>
+            <span class="chip">Mutual funds / SIP</span><span class="chip">Rental property</span><span class="chip">Dividends</span><span class="chip">FD / SGB interest</span></div>
+        </div></div>
+
+        <div class="rdpd anim">
+          <span class="k">The goal <small>· Rich Dad's Cashflow Quadrant</small></span>
+          <p><b>Move from the left to the right.</b> You don't have to quit your job — start small on the <b>I</b> side with a monthly SIP, so money begins working for you alongside your salary.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7 · IN FOCUS · YOUR OWN NOTES -->
+    <article class="page spotlight">
+      <div class="sheet">
+        <span class="focus-badge anim">★ In focus · your own notes</span>
+        <h3 class="chap-title anim" style="margin-top:2px">The quadrant, in your words</h3>
+        <p class="chap-lead anim">Your own framing of the four roles — the keyword in red is what each one really sells.</p>
+
+        <div class="mynote anim"><div class="role"><div class="r">Employee</div><span class="tag">Money</span></div><div class="desc">Works based on the owner's idea.</div></div>
+        <div class="mynote anim"><div class="role"><div class="r">Self-employed</div><span class="tag">Customer</span></div><div class="desc">Owner's idea — and the owner must do the work.</div></div>
+        <div class="mynote anim"><div class="role"><div class="r">Business</div><span class="tag">Brand &amp; Trust</span></div><div class="desc">Employees work the owner's idea.</div></div>
+        <div class="mynote anim"><div class="role"><div class="r">Investor</div><span class="tag">Margin of Profit</span></div><div class="desc">Owner of a business with a revenue model.</div></div>
+
+        <div class="checklist anim">
+          <h4>Self-employed — what to master</h4>
+          <p class="cap">The four things that decide whether you make the jump.</p>
+          <ol>
+            <li><span class="no">1</span>Idea → Quality</li>
+            <li><span class="no">2</span>Managing employees / skills</li>
+            <li><span class="no">3</span>Marketing</li>
+            <li><span class="no">4</span>Investment</li>
+          </ol>
+        </div>
+        <p class="focus-foot anim">Your note ties to the chapter before it: the red keywords show how the value shifts from <b>money</b> (E) to a <b>profit margin</b> (I) as you move toward the right side of the quadrant.</p>
+      </div>
+    </article>
+
+    <!-- 8 · CHART -->
+    <article class="page chart">
+      <div class="sheet">
+        <span class="chap-tag anim">Chapter 05</span>
+        <h3 class="chap-title anim" style="margin-top:14px">What actually beats inflation</h3>
+        <p class="chap-lead anim">Left of the dashed line loses real value; right of it builds wealth.</p>
+        <div class="legend anim">
+          <span><i class="sw" style="background:var(--coral)"></i>Below inflation</span>
+          <span><i class="sw" style="background:var(--green)"></i>Beats inflation</span>
+          <span><i class="sw" style="border:1px dashed var(--coral)"></i>Inflation ~6%</span>
+        </div>
+        <div class="bars anim" id="bars">
+          <div class="bar-row"><div class="bar-top"><span class="nm">Savings account</span><span class="vl">3%</span></div><div class="track"><span class="infl"></span><div class="fill below" data-pct="21.4"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Inflation</span><span class="vl">~6%</span></div><div class="track"><span class="infl"></span><div class="fill below" data-pct="42.8" style="background:linear-gradient(90deg,#E0A06a,var(--coral))"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Fixed Deposit</span><span class="vl">7%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="50"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">PPF</span><span class="vl">7.1%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="50.7"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Gold / SGB</span><span class="vl">9%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="64.3"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Real estate</span><span class="vl">9%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="64.3"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Mutual funds / SIP</span><span class="vl">11%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="78.6"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Index funds / Equity</span><span class="vl">13%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="92.8"></div></div></div>
+        </div>
+        <p class="note anim">Indicative long-term / historical averages for India, for learning only — not a prediction or financial advice. Returns vary; higher returns carry higher risk. Check current rates before deciding.</p>
+      </div>
+    </article>
+
+    <!-- 7 · SCHEDULE -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">Chapter 06</span>
+        <h3 class="chap-title anim" style="margin-top:14px">6-week study plan<span class="tamil">படிப்பு அட்டவணை</span></h3>
+        <p class="chap-lead anim">One focused topic a week. By week 6 you'll have your own plan written.</p>
+        <div class="week anim"><div class="wn">Week<b>01</b></div><div><h4>Mindset &amp; inflation</h4><p>Why money loses value; track one month of your spending.</p></div></div>
+        <div class="week anim"><div class="wn">Week<b>02</b></div><div><h4>Compounding</h4><p>Returns on returns, the Rule of 72, run SIP scenarios.</p></div></div>
+        <div class="week anim"><div class="wn">Week<b>03</b></div><div><h4>Saving safety net</h4><p>Emergency fund, FD, RD, PPF — start a 6-month buffer.</p></div></div>
+        <div class="week anim"><div class="wn">Week<b>04</b></div><div><h4>Investing basics</h4><p>Risk vs return, how SIPs and mutual funds work.</p></div></div>
+        <div class="week anim"><div class="wn">Week<b>05</b></div><div><h4>Investment types</h4><p>Index, equity, gold, real estate — compare the chart.</p></div></div>
+        <div class="week anim"><div class="wn">Week<b>06</b></div><div><h4>Build your plan</h4><p>Map goals to time, split saving vs investing, write it down.</p></div></div>
+      </div>
+    </article>
+
+    <!-- 8 · PRACTICE -->
+    <article class="page practice">
+      <div class="sheet">
+        <span class="chap-tag anim">Chapter 07</span>
+        <h3 class="chap-title anim" style="margin-top:14px">Practice words</h3>
+        <p class="hd anim">Tap a card to flip and check the meaning.</p>
+        <div class="flipgrid anim">
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Compounding</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Compounding</span><p>Returns that earn their own returns over time.</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Inflation</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Inflation</span><p>The yearly rise in prices that shrinks money's value (~6%).</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Real return</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Real return</span><p>Your return minus inflation — the growth that truly counts.</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Asset</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Asset</span><p>Anything that puts cashflow into your pocket.</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Liability</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Liability</span><p>Anything that takes cashflow out of your pocket.</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">SIP</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">SIP</span><p>A fixed amount invested every month — automates compounding.</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Rule of 72</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Rule of 72</span><p>72 ÷ return = years for your money to double.</p></div></div></div>
+          <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Rat race</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Rat race</span><p>Working only to pay bills, with no income from assets.</p></div></div></div>
+        </div>
+
+        <div class="useit anim">
+          <h3>Now use it</h3>
+          <p class="lead">Read each one, decide your answer, then tap to reveal.</p>
+          <div class="q" tabindex="0"><div class="ask">A car bought on EMI for daily use is an asset or a liability?</div><span class="reveal">Tap to reveal →</span><div class="ans"><b>Liability</b> — it takes cashflow out of your pocket every month.</div></div>
+          <div class="q" tabindex="0"><div class="ask">₹5,000 invested into an index fund every month is an example of a…?</div><span class="reveal">Tap to reveal →</span><div class="ans">A <b>SIP</b> — and it builds your asset column.</div></div>
+          <div class="q" tabindex="0"><div class="ask">FD gives 7%, inflation is 6%. What is your real return?</div><span class="reveal">Tap to reveal →</span><div class="ans">Just <b>1%</b> — return minus inflation.</div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 9 · CLOSING -->
+    <article class="page closing">
+      <div class="sheet" style="justify-content:center">
+        <div class="r72 anim"><div class="big mono">72 ÷ rate = years to double</div><small>At 12% money doubles in ~6 years · at 6% it takes ~12</small></div>
+        <p class="anim">Built from your handwritten outline. Educational only — not financial advice. Always check current rates and your own goals before investing.</p>
+        <button class="restart anim" id="restart">↺ Back to the cover</button>
+      </div>
+    </article>
+
+  </div>
+
+  <button class="nav prev" id="prev" aria-label="Previous page">‹</button>
+  <button class="nav next" id="next" aria-label="Next page">›</button>
+  <div class="pager" id="pager"></div>
+</div>
+
+<script>
+  const pagesEl=document.getElementById('pages');
+  const pages=[...pagesEl.children];
+  const total=pages.length;
+  const prevBtn=document.getElementById('prev');
+  const nextBtn=document.getElementById('next');
+  const pager=document.getElementById('pager');
+  const pgnum=document.getElementById('pgnum');
+  let idx=0, barsDone=false;
+
+  // build dots
+  pages.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='dot'+(i===0?' on':'');
+    d.setAttribute('aria-label','Go to page '+(i+1));
+    d.addEventListener('click',()=>go(i));
+    pager.appendChild(d);
+  });
+  const dots=[...pager.children];
+
+  function go(i){
+    idx=Math.max(0,Math.min(total-1,i));
+    pagesEl.style.transform='translateX(-'+(idx*100)+'%)';
+    pages.forEach((p,n)=>p.classList.toggle('active',n===idx));
+    dots.forEach((d,n)=>d.classList.toggle('on',n===idx));
+    prevBtn.disabled=idx===0;
+    nextBtn.disabled=idx===total-1;
+    pgnum.textContent=String(idx+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+    pages[idx].scrollTop=0;
+    if(pages[idx].classList.contains('chart')&&!barsDone){animateBars();barsDone=true;}
+  }
+  function animateBars(){
+    document.querySelectorAll('#bars .fill').forEach((f,i)=>{
+      setTimeout(()=>{f.style.width=f.dataset.pct+'%';},120+i*80);
+    });
+  }
+
+  prevBtn.addEventListener('click',()=>go(idx-1));
+  nextBtn.addEventListener('click',()=>go(idx+1));
+  document.getElementById('restart').addEventListener('click',()=>go(0));
+
+  // contents jump (data-goto is the chapter page index)
+  document.querySelectorAll('[data-goto]').forEach(b=>{
+    b.addEventListener('click',()=>go(parseInt(b.dataset.goto,10)));
+  });
+
+  // keyboard
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')go(idx+1);
+    if(e.key==='ArrowLeft')go(idx-1);
+  });
+
+  // swipe (ignore swipes that start on horizontally-scrollable bits — none here)
+  let sx=0,sy=0,moved=false;
+  document.getElementById('book').addEventListener('touchstart',e=>{
+    sx=e.touches[0].clientX;sy=e.touches[0].clientY;moved=false;
+  },{passive:true});
+  document.getElementById('book').addEventListener('touchmove',e=>{moved=true;},{passive:true});
+  document.getElementById('book').addEventListener('touchend',e=>{
+    if(!moved)return;
+    const dx=e.changedTouches[0].clientX-sx;
+    const dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4){
+      if(dx<0)go(idx+1); else go(idx-1);
+    }
+  },{passive:true});
+
+  // mouse wheel / trackpad → turn pages (scrolls page content first if it overflows)
+  let wheelLock=false;
+  document.getElementById('book').addEventListener('wheel',e=>{
+    const page=pages[idx];
+    const down=e.deltaY>0, up=e.deltaY<0;
+    const atTop=page.scrollTop<=0;
+    const atBottom=page.scrollTop+page.clientHeight>=page.scrollHeight-1;
+    // let the page scroll its own overflow first
+    if((down&&!atBottom)||(up&&!atTop))return;
+    e.preventDefault();
+    if(wheelLock||Math.abs(e.deltaY)<6)return;
+    wheelLock=true;
+    if(down)go(idx+1); else if(up)go(idx-1);
+    setTimeout(()=>{wheelLock=false;},650);
+  },{passive:false});
+
+  // expandable sub-topics
+  document.querySelectorAll('.topic').forEach(t=>{
+    const toggle=()=>t.classList.toggle('open');
+    t.addEventListener('click',toggle);
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+  // flip cards
+  document.querySelectorAll('.flip').forEach(f=>{
+    const toggle=()=>f.classList.toggle('open');
+    f.addEventListener('click',toggle);
+    f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+  // reveal answers
+  document.querySelectorAll('.q').forEach(q=>{
+    const toggle=()=>q.classList.toggle('open');
+    q.addEventListener('click',toggle);
+    q.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+
+  go(0);
+</script>
+</body>
+</html>
