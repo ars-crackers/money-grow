@@ -160,6 +160,17 @@
   .focus-foot{font-size:.78rem;color:var(--ink-soft);margin-top:16px;
     border-top:1px dashed var(--line);padding-top:12px;}
 
+  /* income-type badge colour + priority ladder */
+  .qd.mid .badge{background:#B98A3C;}
+  .rung{display:flex;gap:13px;align-items:flex-start;background:rgba(255,255,255,.6);
+    border:1px solid var(--line);border-left:4px solid var(--green);border-radius:13px;
+    padding:13px 15px;margin-bottom:9px;}
+  .rung .no{flex:0 0 30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;
+    display:grid;place-items:center;font-family:"Fraunces",serif;font-size:1.1rem;}
+  .rung h4{font-family:"IBM Plex Sans",sans-serif;font-size:1rem;font-weight:600;margin-bottom:2px;}
+  .rung p{margin:0;font-size:.85rem;color:var(--ink-soft);line-height:1.45;}
+  .rung p b{color:var(--ink);}
+
   /* ===== inline illustrations ===== */
   .illus{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:14px;
     padding:14px 14px 9px;margin-bottom:18px;}
@@ -273,7 +284,7 @@
 </head>
 <body>
 
-<div class="pgnum" id="pgnum">01 / 11</div>
+<div class="pgnum" id="pgnum">01 / 13</div>
 
 <div class="book" id="book">
   <div class="pages" id="pages">
@@ -295,170 +306,70 @@
         <div class="eyebrow anim">Contents · பொருளடக்கம்</div>
         <h2 class="anim" style="margin-top:8px">What's inside</h2>
         <p class="sub anim">Tap a chapter to jump, or swipe through in order.</p>
-        <button class="toc-item anim" data-goto="2"><span class="n">01</span><span class="t">Compounding &amp; Inflation<small>The two forces</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="3"><span class="n">02</span><span class="t">Saving &amp; Investment<small>Two ways to hold money</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="4"><span class="n">03</span><span class="t">Saving &amp; Investment types<small>The toolbox</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="5"><span class="n">04</span><span class="t">The Cashflow Quadrant<small>E · S · B · I — Kiyosaki</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="6"><span class="n" style="color:var(--coral)">★</span><span class="t">In focus — your own notes<small>The quadrant in your words</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="7"><span class="n">05</span><span class="t">Growth rate chart<small>What beats inflation</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="8"><span class="n">06</span><span class="t">6-week schedule<small>Learn it properly</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="9"><span class="n">07</span><span class="t">Practice words<small>Flip cards &amp; use them</small></span><span class="go">→</span></button>
+                <button class="toc-item anim" data-goto="2"><span class="n">01</span><span class="t">Types of income<small>Active · portfolio · passive</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="3"><span class="n">02</span><span class="t">The Cashflow Quadrant<small>E · S · B · I — Kiyosaki</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="4"><span class="n">03</span><span class="t">In focus — your own notes<small>The quadrant in your words</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="5"><span class="n">04</span><span class="t">Compounding &amp; Inflation<small>The two forces</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="6"><span class="n">05</span><span class="t">Saving &amp; Investment<small>Two ways to hold money</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="7"><span class="n">06</span><span class="t">Saving &amp; Investment types<small>The toolbox</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="8"><span class="n">07</span><span class="t">Growth rate chart<small>What beats inflation</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="9"><span class="n">08</span><span class="t">Beat inflation<small>Give your money a job</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="10"><span class="n">09</span><span class="t">6-week schedule<small>Learn it properly</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="11"><span class="n">10</span><span class="t">Practice words<small>Flip cards &amp; use them</small></span><span class="go">→</span></button>
       </div>
     </article>
 
-    <!-- 3 · CH 01 -->
+    <!-- 8 · CH 05 · TYPES OF INCOME -->
     <article class="page">
       <div class="sheet">
-        <span class="chap-tag anim">The two forces</span>
+        <span class="chap-tag anim">Income structure</span>
         <div class="chap-num anim">01</div>
-        <h3 class="chap-title anim">Compounding &amp; Inflation<span class="tamil">கூட்டு வளர்ச்சி &amp; பணவீக்கம்</span></h3>
-        <p class="chap-lead anim">One force quietly grows your money; the other quietly shrinks it. Tap + to open each.</p>
+        <h3 class="chap-title anim">Types of income<span class="tamil">வருமான வகைகள்</span></h3>
+        <p class="chap-lead anim">Money reaches you in three ways. Most people only have the first — the goal is to add the other two.</p>
 
         <div class="illus anim">
-          <svg viewBox="0 0 320 132" role="img" aria-label="Compounding curve rising while an inflation line falls">
-            <line x1="14" y1="116" x2="306" y2="116" stroke="#D6CDB8" stroke-width="1.5"/>
-            <path d="M14,116 C120,114 188,106 228,78 C262,54 284,28 300,14" fill="none" stroke="#B98A3C" stroke-width="3.5" stroke-linecap="round"/>
-            <path d="M300,14 l-10,3 m10,-3 l-3,10" fill="none" stroke="#B98A3C" stroke-width="3.5" stroke-linecap="round"/>
-            <path d="M14,60 C100,72 200,92 304,108" fill="none" stroke="#CE5034" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round"/>
-            <path d="M304,108 l-9,-5 m9,5 l-5,9" fill="none" stroke="#CE5034" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="20" cy="116" r="7" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
-            <circle cx="20" cy="116" r="2.4" fill="#B98A3C"/>
-            <text x="226" y="38" font-size="11" fill="#1E5C3E" font-family="monospace">Compounding ↑</text>
-            <text x="64" y="64" font-size="11" fill="#CE5034" font-family="monospace">Inflation ↓</text>
+          <svg viewBox="0 0 320 128" role="img" aria-label="Three income streams flowing into a wallet">
+            <rect x="214" y="52" width="92" height="56" rx="10" fill="#E7EFF4" stroke="#16302A" stroke-width="2.5"/>
+            <rect x="214" y="66" width="92" height="10" fill="#16302A" opacity=".12"/>
+            <circle cx="292" cy="84" r="7" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
+            <text x="289" y="88" font-size="9" fill="#B98A3C" font-family="monospace">₹</text>
+            <!-- active (coral) -->
+            <text x="6" y="30" font-size="10" fill="#9C4631" font-family="monospace">ACTIVE — you work</text>
+            <path d="M120,26 H208 l0,30" fill="none" stroke="#9C4631" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M208,56 l-5,-9 m5,9 l5,-9" fill="none" stroke="#9C4631" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- portfolio (brass) -->
+            <text x="6" y="70" font-size="10" fill="#8A6A1E" font-family="monospace">PORTFOLIO — investments</text>
+            <path d="M150,66 H210" fill="none" stroke="#B98A3C" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M210,66 l-9,-5 m9,5 l-9,5" fill="none" stroke="#B98A3C" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- passive (green) -->
+            <text x="6" y="110" font-size="10" fill="#1E5C3E" font-family="monospace">PASSIVE — assets pay you</text>
+            <path d="M126,106 H208 l0,-20" fill="none" stroke="#2F7A55" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M208,86 l-5,9 m5,-9 l5,9" fill="none" stroke="#2F7A55" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
-          <div class="cap">Same money, two directions — over time</div>
+          <div class="cap">Three streams into one wallet</div>
         </div>
 
-        <div class="topic anim" tabindex="0">
-          <div class="topic-head"><h4>Compounding effect <span class="ta">கூட்டு வளர்ச்சி</span></h4><span class="plus">+</span></div>
-          <p class="topic-sub">Returns that earn their own returns.</p>
-          <div class="more"><div class="more-inner">Time is the biggest lever — starting early beats investing more later. Small, regular amounts snowball: <b>₹5,000/month at 12% for 20 years ≈ ₹50 lakh</b>, of which most is growth, not your deposits.</div></div>
-          <span class="rate">Your friend ↑</span>
-        </div>
+        <div class="qd left anim"><div class="badge">A</div><div>
+          <h4>Active income <span>· you work for it</span></h4>
+          <p>Trade time and effort for money. It stops the moment you stop — and it's taxed the most.</p>
+          <div class="ex"><b>Examples</b><span class="chip">Salary</span><span class="chip">Freelance work</span><span class="chip">Daily wages</span></div>
+        </div></div>
 
-        <div class="topic warn anim" tabindex="0">
-          <div class="topic-head"><h4>Inflation <span class="ta">பணவீக்கம்</span></h4><span class="plus">+</span></div>
-          <p class="topic-sub">The yearly rise in prices, ~6% in India.</p>
-          <div class="more"><div class="more-inner">₹100 today buys less in 10 years. Money left idle loses value silently. <b>Real return = your return − inflation</b> — a 7% FD against 6% inflation is only 1% of real growth.</div></div>
-          <span class="rate">Your tax ↓</span>
-        </div>
+        <div class="qd mid anim"><div class="badge">P</div><div>
+          <h4>Portfolio income <span>· investments grow</span></h4>
+          <p>Money you invested earns more money through price growth, dividends or interest.</p>
+          <div class="ex"><b>Examples</b><span class="chip">Mutual fund / SIP gains</span><span class="chip">Share dividends</span><span class="chip">FD interest</span></div>
+        </div></div>
+
+        <div class="qd right anim"><div class="badge">P</div><div>
+          <h4>Passive income <span>· assets pay you</span></h4>
+          <p>An asset keeps paying with little ongoing work — income while you sleep.</p>
+          <div class="ex"><b>Examples</b><span class="chip">House rent</span><span class="chip">Business that runs itself</span><span class="chip">Royalties</span></div>
+        </div></div>
 
         <div class="rdpd anim">
-          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
-          <p><b>Make money work for you.</b> Most people work for money for life; the shift is building money that earns while you sleep — exactly the compounding cashflow above.</p>
-        </div>
-      </div>
-    </article>
-
-    <!-- 4 · CH 02 -->
-    <article class="page">
-      <div class="sheet">
-        <span class="chap-tag anim">Two ways to hold money</span>
-        <div class="chap-num anim">02</div>
-        <h3 class="chap-title anim">Saving &amp; Investment<span class="tamil">சேமிப்பு &amp; முதலீடு</span></h3>
-        <p class="chap-lead anim">Saving keeps money safe and ready; investing puts it to work. You need both, in order.</p>
-
-        <div class="illus anim">
-          <svg viewBox="0 0 320 132" role="img" aria-label="A piggy bank for saving and a growing plant for investing">
-            <!-- piggy bank (save) -->
-            <ellipse cx="78" cy="78" rx="48" ry="34" fill="#E7EFF4" stroke="#2C5E97" stroke-width="2.5"/>
-            <path d="M48,52 q8,-14 22,-8" fill="none" stroke="#2C5E97" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="66" y="44" width="22" height="5" rx="2.5" fill="#2C5E97"/>
-            <circle cx="98" cy="70" r="3" fill="#2C5E97"/>
-            <rect x="44" y="106" width="9" height="12" rx="3" fill="#2C5E97"/>
-            <rect x="104" y="106" width="9" height="12" rx="3" fill="#2C5E97"/>
-            <circle cx="77" cy="24" r="9" fill="#E4CF9F" stroke="#B98A3C" stroke-width="2"/>
-            <text x="73" y="28" font-size="10" fill="#B98A3C" font-family="monospace">₹</text>
-            <text x="56" y="128" font-size="10" fill="#2C5E97" font-family="monospace">SAVE</text>
-            <!-- divider arrow -->
-            <path d="M138,70 h44 m0,0 l-9,-6 m9,6 l-9,6" fill="none" stroke="#B98A3C" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- plant (invest) -->
-            <path d="M214,118 h64 l-8,-26 h-48 z" fill="#E7EFF4" stroke="#1E5C3E" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M246,92 C246,72 246,58 246,44" fill="none" stroke="#1E5C3E" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M246,64 C232,58 224,46 226,34 C240,36 248,48 246,64 Z" fill="#2F7A55" stroke="#1E5C3E" stroke-width="1.5"/>
-            <path d="M246,52 C260,46 270,36 268,26 C254,28 246,38 246,52 Z" fill="#4FA178" stroke="#1E5C3E" stroke-width="1.5"/>
-            <circle cx="246" cy="30" r="6" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
-            <text x="232" y="128" font-size="10" fill="#1E5C3E" font-family="monospace">INVEST</text>
-          </svg>
-          <div class="cap">Park it safely · then let it grow</div>
-        </div>
-
-        <div class="topic anim" tabindex="0">
-          <div class="topic-head"><h4>Saving <span class="ta">சேமிப்பு</span></h4><span class="plus">+</span></div>
-          <p class="topic-sub">Money set aside for safety and quick access.</p>
-          <div class="more"><div class="more-inner">Low risk, low return. Build an <b>emergency fund of 6 months' expenses</b> here before investing a single rupee — so you never have to sell investments at a bad time.</div></div>
-          <span class="rate">Safety first</span>
-        </div>
-
-        <div class="topic anim" tabindex="0">
-          <div class="topic-head"><h4>Investment <span class="ta">முதலீடு</span></h4><span class="plus">+</span></div>
-          <p class="topic-sub">Money put to work for growth.</p>
-          <div class="more"><div class="more-inner">Accepts some risk for higher return over a long horizon. This is where compounding does its heavy lifting. <b>Save first, then invest the surplus.</b></div></div>
-          <span class="rate">Growth engine</span>
-        </div>
-
-        <div class="rdpd anim">
-          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
-          <p><b>Assets vs liabilities — judged by cashflow.</b> An asset puts cashflow <b>into</b> your pocket; a liability takes it <b>out</b>. Fund your assets before expenses — pay yourself first.</p>
-        </div>
-      </div>
-    </article>
-
-    <!-- 5 · CH 03 -->
-    <article class="page">
-      <div class="sheet">
-        <span class="chap-tag anim">The toolbox</span>
-        <div class="chap-num anim">03</div>
-        <h3 class="chap-title anim">Saving &amp; Investment types<span class="tamil">வகைகள்</span></h3>
-        <p class="chap-lead anim">The instruments, with typical long-term Indian returns. Tap + for where each fits.</p>
-
-        <div class="illus anim">
-          <svg viewBox="0 0 320 132" role="img" aria-label="Stacked coins growing into a rising bar chart">
-            <line x1="14" y1="116" x2="306" y2="116" stroke="#D6CDB8" stroke-width="1.5"/>
-            <!-- coin stacks (left, safe) -->
-            <g stroke="#B98A3C" stroke-width="1.6">
-              <ellipse cx="44" cy="110" rx="22" ry="7" fill="#E4CF9F"/>
-              <ellipse cx="44" cy="101" rx="22" ry="7" fill="#EAD7A3"/>
-              <ellipse cx="44" cy="92" rx="22" ry="7" fill="#E4CF9F"/>
-            </g>
-            <text x="40" y="97" font-size="11" fill="#8A6A1E" font-family="monospace">₹</text>
-            <!-- rising bars (right, growth) -->
-            <rect x="120" y="86" width="26" height="30" rx="3" fill="#BcD8C6" stroke="#1E5C3E" stroke-width="1.5"/>
-            <rect x="156" y="68" width="26" height="48" rx="3" fill="#7FB89A" stroke="#1E5C3E" stroke-width="1.5"/>
-            <rect x="192" y="46" width="26" height="70" rx="3" fill="#4FA178" stroke="#1E5C3E" stroke-width="1.5"/>
-            <rect x="228" y="26" width="26" height="90" rx="3" fill="#2F7A55" stroke="#1E5C3E" stroke-width="1.5"/>
-            <!-- growth arrow -->
-            <path d="M120,80 C160,70 210,46 262,18" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
-            <path d="M262,18 l-10,2 m10,-2 l-2,10" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
-            <text x="118" y="130" font-size="10" fill="#1E5C3E" font-family="monospace">SAFE → GROWTH</text>
-          </svg>
-          <div class="cap">From safe coins to higher-growth instruments</div>
-        </div>
-
-        <div class="topic anim" tabindex="0">
-          <div class="topic-head"><h4>Savings &amp; FD / RD / PPF</h4><span class="plus">+</span></div>
-          <p class="topic-sub">The safe column — protect, don't grow.</p>
-          <div class="more"><div class="more-inner"><b>Savings a/c ~3%</b> (fully liquid) · <b>FD/RD ~7%</b> (locked, guaranteed) · <b>PPF ~7.1%</b> (tax-free, 15 yr). Ideal for emergency funds and short goals.</div></div>
-          <span class="rate">~3–7% p.a.</span>
-        </div>
-
-        <div class="topic anim" tabindex="0">
-          <div class="topic-head"><h4>Gold / SGB &amp; Real estate</h4><span class="plus">+</span></div>
-          <p class="topic-sub">Inflation hedges, slower to sell.</p>
-          <div class="more"><div class="more-inner"><b>Gold / Sovereign Gold Bonds ~8–10%</b> (SGB adds interest on top of price). <b>Real estate ~8–10%</b> but illiquid and lumpy. Good diversifiers, not your only engine.</div></div>
-          <span class="rate">~8–10% p.a.</span>
-        </div>
-
-        <div class="topic anim" tabindex="0">
-          <div class="topic-head"><h4>Mutual funds / SIP &amp; Equity</h4><span class="plus">+</span></div>
-          <p class="topic-sub">The growth engine — highest long-run return.</p>
-          <div class="more"><div class="more-inner"><b>SIP / mutual funds ~10–12%</b> (a monthly SIP automates compounding). <b>Index funds &amp; equity ~12%+</b> — highest growth, highest swings, needs a long horizon.</div></div>
-          <span class="rate">~10–12%+ p.a.</span>
-        </div>
-
-        <div class="rdpd anim">
-          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
-          <p><b>Build your asset column → escape the rat race.</b> When cashflow from assets covers your monthly expenses, you no longer depend on a paycheck. That point is financial freedom.</p>
+          <span class="k">How it links <small>· to the quadrant</small></span>
+          <p><b>Active</b> is the E · S side (you work for money). <b>Portfolio</b> and <b>passive</b> are the B · I side (money works for you). Growing wealth means slowly building the second and third streams.</p>
         </div>
       </div>
     </article>
@@ -467,7 +378,7 @@
     <article class="page">
       <div class="sheet">
         <span class="chap-tag anim">The big picture</span>
-        <div class="chap-num anim">04</div>
+        <div class="chap-num anim">02</div>
         <h3 class="chap-title anim">The Cashflow Quadrant<span class="tamil">பணப்புழக்க கட்டம்</span></h3>
         <p class="attrib anim">📕 From Rich Dad's Cashflow Quadrant · Robert Kiyosaki</p>
         <p class="chap-lead anim" style="margin-top:0">There are only 4 ways money comes to you. The letters E-S-B-I show <b>where</b> your income comes from.</p>
@@ -544,10 +455,167 @@
       </div>
     </article>
 
-    <!-- 8 · CHART -->
+    <!-- 3 · CH 01 -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">The two forces</span>
+        <div class="chap-num anim">04</div>
+        <h3 class="chap-title anim">Compounding &amp; Inflation<span class="tamil">கூட்டு வளர்ச்சி &amp; பணவீக்கம்</span></h3>
+        <p class="chap-lead anim">One force quietly grows your money; the other quietly shrinks it. Tap + to open each.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 132" role="img" aria-label="Compounding curve rising while an inflation line falls">
+            <line x1="14" y1="116" x2="306" y2="116" stroke="#D6CDB8" stroke-width="1.5"/>
+            <path d="M14,116 C120,114 188,106 228,78 C262,54 284,28 300,14" fill="none" stroke="#B98A3C" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M300,14 l-10,3 m10,-3 l-3,10" fill="none" stroke="#B98A3C" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M14,60 C100,72 200,92 304,108" fill="none" stroke="#CE5034" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round"/>
+            <path d="M304,108 l-9,-5 m9,5 l-5,9" fill="none" stroke="#CE5034" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="20" cy="116" r="7" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
+            <circle cx="20" cy="116" r="2.4" fill="#B98A3C"/>
+            <text x="226" y="38" font-size="11" fill="#1E5C3E" font-family="monospace">Compounding ↑</text>
+            <text x="64" y="64" font-size="11" fill="#CE5034" font-family="monospace">Inflation ↓</text>
+          </svg>
+          <div class="cap">Same money, two directions — over time</div>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Compounding effect <span class="ta">கூட்டு வளர்ச்சி</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">Returns that earn their own returns.</p>
+          <div class="more"><div class="more-inner">Time is the biggest lever — starting early beats investing more later. Small, regular amounts snowball: <b>₹5,000/month at 12% for 20 years ≈ ₹50 lakh</b>, of which most is growth, not your deposits.</div></div>
+          <span class="rate">Your friend ↑</span>
+        </div>
+
+        <div class="topic warn anim" tabindex="0">
+          <div class="topic-head"><h4>Inflation <span class="ta">பணவீக்கம்</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">The yearly rise in prices, ~6% in India.</p>
+          <div class="more"><div class="more-inner">₹100 today buys less in 10 years. Money left idle loses value silently. <b>Real return = your return − inflation</b> — a 7% FD against 6% inflation is only 1% of real growth.</div></div>
+          <span class="rate">Your tax ↓</span>
+        </div>
+
+        <div class="rdpd anim">
+          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
+          <p><b>Make money work for you.</b> Most people work for money for life; the shift is building money that earns while you sleep — exactly the compounding cashflow above.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 · CH 02 -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">Two ways to hold money</span>
+        <div class="chap-num anim">05</div>
+        <h3 class="chap-title anim">Saving &amp; Investment<span class="tamil">சேமிப்பு &amp; முதலீடு</span></h3>
+        <p class="chap-lead anim">Saving keeps money safe and ready; investing puts it to work. You need both, in order.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 132" role="img" aria-label="A piggy bank for saving and a growing plant for investing">
+            <!-- piggy bank (save) -->
+            <ellipse cx="78" cy="78" rx="48" ry="34" fill="#E7EFF4" stroke="#2C5E97" stroke-width="2.5"/>
+            <path d="M48,52 q8,-14 22,-8" fill="none" stroke="#2C5E97" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="66" y="44" width="22" height="5" rx="2.5" fill="#2C5E97"/>
+            <circle cx="98" cy="70" r="3" fill="#2C5E97"/>
+            <rect x="44" y="106" width="9" height="12" rx="3" fill="#2C5E97"/>
+            <rect x="104" y="106" width="9" height="12" rx="3" fill="#2C5E97"/>
+            <circle cx="77" cy="24" r="9" fill="#E4CF9F" stroke="#B98A3C" stroke-width="2"/>
+            <text x="73" y="28" font-size="10" fill="#B98A3C" font-family="monospace">₹</text>
+            <text x="56" y="128" font-size="10" fill="#2C5E97" font-family="monospace">SAVE</text>
+            <!-- divider arrow -->
+            <path d="M138,70 h44 m0,0 l-9,-6 m9,6 l-9,6" fill="none" stroke="#B98A3C" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- plant (invest) -->
+            <path d="M214,118 h64 l-8,-26 h-48 z" fill="#E7EFF4" stroke="#1E5C3E" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M246,92 C246,72 246,58 246,44" fill="none" stroke="#1E5C3E" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M246,64 C232,58 224,46 226,34 C240,36 248,48 246,64 Z" fill="#2F7A55" stroke="#1E5C3E" stroke-width="1.5"/>
+            <path d="M246,52 C260,46 270,36 268,26 C254,28 246,38 246,52 Z" fill="#4FA178" stroke="#1E5C3E" stroke-width="1.5"/>
+            <circle cx="246" cy="30" r="6" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
+            <text x="232" y="128" font-size="10" fill="#1E5C3E" font-family="monospace">INVEST</text>
+          </svg>
+          <div class="cap">Park it safely · then let it grow</div>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Saving <span class="ta">சேமிப்பு</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">Money set aside for safety and quick access.</p>
+          <div class="more"><div class="more-inner">Low risk, low return. Build an <b>emergency fund of 6 months' expenses</b> here before investing a single rupee — so you never have to sell investments at a bad time.</div></div>
+          <span class="rate">Safety first</span>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Investment <span class="ta">முதலீடு</span></h4><span class="plus">+</span></div>
+          <p class="topic-sub">Money put to work for growth.</p>
+          <div class="more"><div class="more-inner">Accepts some risk for higher return over a long horizon. This is where compounding does its heavy lifting. <b>Save first, then invest the surplus.</b></div></div>
+          <span class="rate">Growth engine</span>
+        </div>
+
+        <div class="rdpd anim">
+          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
+          <p><b>Assets vs liabilities — judged by cashflow.</b> An asset puts cashflow <b>into</b> your pocket; a liability takes it <b>out</b>. Fund your assets before expenses — pay yourself first.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 · CH 03 -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">The toolbox</span>
+        <div class="chap-num anim">06</div>
+        <h3 class="chap-title anim">Saving &amp; Investment types<span class="tamil">வகைகள்</span></h3>
+        <p class="chap-lead anim">The instruments, with typical long-term Indian returns. Tap + for where each fits.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 132" role="img" aria-label="Stacked coins growing into a rising bar chart">
+            <line x1="14" y1="116" x2="306" y2="116" stroke="#D6CDB8" stroke-width="1.5"/>
+            <!-- coin stacks (left, safe) -->
+            <g stroke="#B98A3C" stroke-width="1.6">
+              <ellipse cx="44" cy="110" rx="22" ry="7" fill="#E4CF9F"/>
+              <ellipse cx="44" cy="101" rx="22" ry="7" fill="#EAD7A3"/>
+              <ellipse cx="44" cy="92" rx="22" ry="7" fill="#E4CF9F"/>
+            </g>
+            <text x="40" y="97" font-size="11" fill="#8A6A1E" font-family="monospace">₹</text>
+            <!-- rising bars (right, growth) -->
+            <rect x="120" y="86" width="26" height="30" rx="3" fill="#BcD8C6" stroke="#1E5C3E" stroke-width="1.5"/>
+            <rect x="156" y="68" width="26" height="48" rx="3" fill="#7FB89A" stroke="#1E5C3E" stroke-width="1.5"/>
+            <rect x="192" y="46" width="26" height="70" rx="3" fill="#4FA178" stroke="#1E5C3E" stroke-width="1.5"/>
+            <rect x="228" y="26" width="26" height="90" rx="3" fill="#2F7A55" stroke="#1E5C3E" stroke-width="1.5"/>
+            <!-- growth arrow -->
+            <path d="M120,80 C160,70 210,46 262,18" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M262,18 l-10,2 m10,-2 l-2,10" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
+            <text x="118" y="130" font-size="10" fill="#1E5C3E" font-family="monospace">SAFE → GROWTH</text>
+          </svg>
+          <div class="cap">From safe coins to higher-growth instruments</div>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Savings &amp; FD / RD / PPF</h4><span class="plus">+</span></div>
+          <p class="topic-sub">The safe column — protect, don't grow.</p>
+          <div class="more"><div class="more-inner"><b>Savings a/c ~3%</b> (fully liquid) · <b>FD/RD ~7%</b> (locked, guaranteed) · <b>PPF ~7.1%</b> (tax-free, 15 yr). Ideal for emergency funds and short goals.</div></div>
+          <span class="rate">~3–7% p.a.</span>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Gold / SGB &amp; Real estate</h4><span class="plus">+</span></div>
+          <p class="topic-sub">Inflation hedges, slower to sell.</p>
+          <div class="more"><div class="more-inner"><b>Gold / Sovereign Gold Bonds ~8–10%</b> (SGB adds interest on top of price). <b>Real estate ~8–10%</b> but illiquid and lumpy. Good diversifiers, not your only engine.</div></div>
+          <span class="rate">~8–10% p.a.</span>
+        </div>
+
+        <div class="topic anim" tabindex="0">
+          <div class="topic-head"><h4>Mutual funds / SIP &amp; Equity</h4><span class="plus">+</span></div>
+          <p class="topic-sub">The growth engine — highest long-run return.</p>
+          <div class="more"><div class="more-inner"><b>SIP / mutual funds ~10–12%</b> (a monthly SIP automates compounding). <b>Index funds &amp; equity ~12%+</b> — highest growth, highest swings, needs a long horizon.</div></div>
+          <span class="rate">~10–12%+ p.a.</span>
+        </div>
+
+        <div class="rdpd anim">
+          <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
+          <p><b>Build your asset column → escape the rat race.</b> When cashflow from assets covers your monthly expenses, you no longer depend on a paycheck. That point is financial freedom.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 9 · CHART -->
     <article class="page chart">
       <div class="sheet">
-        <span class="chap-tag anim">Chapter 05</span>
+        <span class="chap-tag anim">Chapter 07</span>
         <h3 class="chap-title anim" style="margin-top:14px">What actually beats inflation</h3>
         <p class="chap-lead anim">Left of the dashed line loses real value; right of it builds wealth.</p>
         <div class="legend anim">
@@ -569,10 +637,52 @@
       </div>
     </article>
 
-    <!-- 7 · SCHEDULE -->
+    <!-- · CH 07 · BEAT INFLATION -->
     <article class="page">
       <div class="sheet">
-        <span class="chap-tag anim">Chapter 06</span>
+        <span class="chap-tag anim">Give money a job</span>
+        <div class="chap-num anim">08</div>
+        <h3 class="chap-title anim">Beat inflation<span class="tamil">பணவீக்கத்தை வெல்லுங்கள்</span></h3>
+        <p class="chap-lead anim">Idle money leaks ~6% a year to inflation. So give every rupee a job — in this order.</p>
+
+        <div class="illus anim">
+          <svg viewBox="0 0 320 128" role="img" aria-label="Steps rising above the inflation line">
+            <!-- inflation waterline -->
+            <line x1="8" y1="92" x2="312" y2="92" stroke="#CE5034" stroke-width="2" stroke-dasharray="5 6"/>
+            <text x="8" y="106" font-size="10" fill="#CE5034" font-family="monospace">Inflation ~6%</text>
+            <!-- rising steps -->
+            <g fill="#E7EFF4" stroke="#1E5C3E" stroke-width="2">
+              <rect x="40" y="80" width="42" height="24"/>
+              <rect x="94" y="62" width="42" height="42"/>
+              <rect x="148" y="44" width="42" height="60"/>
+              <rect x="202" y="26" width="42" height="78"/>
+            </g>
+            <rect x="202" y="26" width="42" height="78" fill="#2F7A55" opacity=".2"/>
+            <path d="M60,74 C110,58 170,36 236,14" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M236,14 l-10,2 m10,-2 l-2,10" fill="none" stroke="#B98A3C" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="254" cy="20" r="8" fill="#E4CF9F" stroke="#B98A3C" stroke-width="1.5"/>
+            <text x="251" y="24" font-size="9" fill="#8A6A1E" font-family="monospace">₹</text>
+          </svg>
+          <div class="cap">Climb each step to stay above inflation</div>
+        </div>
+
+        <div class="rung anim"><div class="no">1</div><div><h4>Emergency fund first</h4><p>6 months of expenses in an FD or liquid fund, so you never break your investments in a crisis.</p></div></div>
+        <div class="rung anim"><div class="no">2</div><div><h4>Clear costly debt</h4><p>Credit cards and personal loans cost <b>15–40%</b> — no investment beats that. Kill these before investing.</p></div></div>
+        <div class="rung anim"><div class="no">3</div><div><h4>Protect with insurance</h4><p>Health + term cover, so one hospital bill or setback can't wipe out your savings.</p></div></div>
+        <div class="rung anim"><div class="no">4</div><div><h4>Invest above inflation</h4><p>Put the surplus to work in SIP / index funds and PPF, targeting returns <b>above ~6%</b> so money grows in real terms.</p></div></div>
+        <div class="rung anim"><div class="no">5</div><div><h4>Diversify &amp; review</h4><p>Spread across equity, gold and debt. Check once a year and raise your SIP whenever your income rises.</p></div></div>
+
+        <div class="rdpd anim">
+          <span class="k">The habit that makes it work</span>
+          <p><b>Pay yourself first, and automate it.</b> On salary day, money moves to savings and SIP <b>before</b> you spend. What you don't see, you don't spend — and your money stays ahead of inflation.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- · SCHEDULE -->
+    <article class="page">
+      <div class="sheet">
+        <span class="chap-tag anim">Chapter 09</span>
         <h3 class="chap-title anim" style="margin-top:14px">6-week study plan<span class="tamil">படிப்பு அட்டவணை</span></h3>
         <p class="chap-lead anim">One focused topic a week. By week 6 you'll have your own plan written.</p>
         <div class="week anim"><div class="wn">Week<b>01</b></div><div><h4>Mindset &amp; inflation</h4><p>Why money loses value; track one month of your spending.</p></div></div>
@@ -587,7 +697,7 @@
     <!-- 8 · PRACTICE -->
     <article class="page practice">
       <div class="sheet">
-        <span class="chap-tag anim">Chapter 07</span>
+        <span class="chap-tag anim">Chapter 10</span>
         <h3 class="chap-title anim" style="margin-top:14px">Practice words</h3>
         <p class="hd anim">Tap a card to flip and check the meaning.</p>
         <div class="flipgrid anim">
