@@ -164,6 +164,25 @@
   .defn{background:#FFF7DD;border:1px solid #E6CF7A;border-radius:12px;padding:12px 15px;
     font-size:.88rem;color:#5C4A1E;line-height:1.5;margin-bottom:16px;}
   .defn b{color:#8A6A1E;}
+  /* quadrant → income mapping */
+  .mapbox{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;}
+  .mapbox .mh{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep);margin-bottom:8px;}
+  .maprow{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px;padding:7px 0;border-top:1px dashed var(--line);}
+  .maprow:first-of-type{border-top:none;}
+  .maprow .ql{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-family:"Fraunces",serif;font-size:1.05rem;color:#fff;}
+  .maprow .ql.left{background:#9C4631;} .maprow .ql.right{background:#1E5C3E;}
+  .maprow .qn{font-size:.88rem;font-weight:500;}
+  .maprow .qn small{color:var(--ink-soft);font-weight:400;}
+  .maprow .it{font-family:"IBM Plex Mono",monospace;font-size:.68rem;font-weight:600;border-radius:20px;padding:3px 9px;white-space:nowrap;}
+  .it.active{background:#F3E2DC;color:#9C4631;} .it.pass{background:#DCEAE0;color:#1E5C3E;} .it.port{background:#FBEFD3;color:#8A6A1E;}
+  .mapfoot{font-size:.82rem;color:var(--ink-soft);margin-top:11px;line-height:1.5;}
+  .mapfoot b{color:var(--ink);}
+  /* chapter-to-chapter bridge */
+  .nextbr{margin-top:18px;border-top:2px solid var(--brass);padding-top:12px;cursor:pointer;
+    font-size:.86rem;color:var(--ink-soft);line-height:1.5;display:flex;gap:10px;align-items:baseline;transition:color .2s ease;}
+  .nextbr:hover{color:var(--ink);}
+  .nextbr .nl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);font-weight:600;white-space:nowrap;}
+  .nextbr b{color:var(--ink);}
   /* income-type badge colour + priority ladder */
   .qd.mid .badge{background:#B98A3C;}
   .rung{display:flex;gap:13px;align-items:flex-start;background:rgba(255,255,255,.6);
@@ -310,13 +329,13 @@
         <div class="eyebrow anim">Contents · பொருளடக்கம்</div>
         <h2 class="anim" style="margin-top:8px">What's inside</h2>
         <p class="sub anim">Tap a chapter to jump, or swipe through in order.</p>
-                                <button class="toc-item anim" data-goto="2"><span class="n">01</span><span class="t">Income &amp; Types<small>Active · portfolio · passive</small></span><span class="go">→</span></button>
+                                        <button class="toc-item anim" data-goto="2"><span class="n">01</span><span class="t">Income &amp; How It Flows<small>Active · portfolio · passive</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="3"><span class="n">02</span><span class="t">The Cashflow Quadrant<small>E · S · B · I — Kiyosaki</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="4"><span class="n">03</span><span class="t">In focus — your own notes<small>The quadrant in your words</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="5"><span class="n">04</span><span class="t">Saving &amp; Investment<small>Two ways to hold money</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="6"><span class="n">05</span><span class="t">Saving &amp; Investment types<small>The toolbox</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="7"><span class="n">06</span><span class="t">Growth rate chart<small>What beats inflation</small></span><span class="go">→</span></button>
-        <button class="toc-item anim" data-goto="8"><span class="n">07</span><span class="t">Compounding &amp; Inflation<small>The two forces</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="7"><span class="n">06</span><span class="t">Compounding &amp; Inflation<small>The two forces</small></span><span class="go">→</span></button>
+        <button class="toc-item anim" data-goto="8"><span class="n">07</span><span class="t">Growth rate chart<small>What beats inflation</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="9"><span class="n">08</span><span class="t">Beat inflation<small>Give your money a job</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="10"><span class="n">09</span><span class="t">6-week schedule<small>Learn it properly</small></span><span class="go">→</span></button>
         <button class="toc-item anim" data-goto="11"><span class="n">10</span><span class="t">Practice words<small>Flip cards &amp; use them</small></span><span class="go">→</span></button>
@@ -328,7 +347,7 @@
       <div class="sheet">
         <span class="chap-tag anim">Income structure</span>
         <div class="chap-num anim">01</div>
-        <h3 class="chap-title anim">Income &amp; Types<span class="tamil">வருமானம் &amp; வகைகள்</span></h3>
+        <h3 class="chap-title anim">Income &amp; How It Flows<span class="tamil">வருமானம் எப்படி வருகிறது</span></h3>
         <p class="chap-lead anim">Money reaches you in three ways. Most people only have the first — the goal is to add the other two.</p>
 
         <div class="defn anim"><b>What is income?</b> Income is simply the money that comes to you — what you earn from work or receive from what you own. <b>Where</b> it comes from is what decides how free you are with money.</div>
@@ -355,19 +374,19 @@
           <div class="cap">Three streams into one wallet</div>
         </div>
 
-        <div class="qd left anim"><div class="badge">A</div><div>
+        <div class="qd left anim"><div class="badge">1</div><div>
           <h4>Active income <span>· you work for it</span></h4>
           <p>Trade time and effort for money. It stops the moment you stop — and it's taxed the most.</p>
           <div class="ex"><b>Examples</b><span class="chip">Salary</span><span class="chip">Freelance work</span><span class="chip">Daily wages</span></div>
         </div></div>
 
-        <div class="qd mid anim"><div class="badge">P</div><div>
+        <div class="qd mid anim"><div class="badge">2</div><div>
           <h4>Portfolio income <span>· investments grow</span></h4>
           <p>Money you invested earns more money through price growth, dividends or interest.</p>
           <div class="ex"><b>Examples</b><span class="chip">Mutual fund / SIP gains</span><span class="chip">Share dividends</span><span class="chip">FD interest</span></div>
         </div></div>
 
-        <div class="qd right anim"><div class="badge">P</div><div>
+        <div class="qd right anim"><div class="badge">3</div><div>
           <h4>Passive income <span>· assets pay you</span></h4>
           <p>An asset keeps paying with little ongoing work — income while you sleep.</p>
           <div class="ex"><b>Examples</b><span class="chip">House rent</span><span class="chip">Business that runs itself</span><span class="chip">Royalties</span></div>
@@ -375,8 +394,9 @@
 
         <div class="rdpd anim">
           <span class="k">How it links <small>· to the quadrant</small></span>
-          <p><b>Active</b> is the E · S side (you work for money). <b>Portfolio</b> and <b>passive</b> are the B · I side (money works for you). Growing wealth means slowly building the second and third streams.</p>
+          <p>These three income types line up with the <b>E · S · B · I</b> quadrant in the next chapter: <b>active</b> = the E · S side (you work for money), <b>portfolio &amp; passive</b> = the B · I side (money works for you). The full mapping is on the Chapter 02 page.</p>
         </div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>You've met the <b>3 kinds of income</b>. Next, see the <b>4 roles</b> that produce them — the Cashflow Quadrant.</span></div>
       </div>
     </article>
 
@@ -387,7 +407,7 @@
         <div class="chap-num anim">02</div>
         <h3 class="chap-title anim">The Cashflow Quadrant<span class="tamil">பணப்புழக்க கட்டம்</span></h3>
         <p class="attrib anim">📕 From Rich Dad's Cashflow Quadrant · Robert Kiyosaki</p>
-        <p class="chap-lead anim" style="margin-top:0">There are only 4 ways money comes to you. The letters E-S-B-I show <b>where</b> your income comes from.</p>
+        <p class="chap-lead anim" style="margin-top:0">E-S-B-I are the 4 <b>roles</b> you can earn money from. Chapter 01 was the <b>income</b>; this chapter is the <b>person</b> earning it.</p>
 
         <div class="quad anim">
           <div class="q-cell left"><span class="L">E</span><div><div class="nm">Employee</div><div class="ln">You have a job — you work for money.</div></div></div>
@@ -397,7 +417,7 @@
         </div>
         <div class="q-key anim">
           <div class="kl"><b>Left (E · S)</b>You work for money — active income. Stop working, income stops.</div>
-          <div class="kr"><b>Right (B · I)</b>Money &amp; systems work for you — can earn while you sleep.</div>
+          <div class="kr"><b>Right (B · I)</b>Money &amp; systems work for you — income keeps coming when you're not working.</div>
         </div>
 
         <div class="qd left anim"><div class="badge">E</div><div>
@@ -423,15 +443,25 @@
 
         <div class="qd right anim"><div class="badge">I</div><div>
           <h4>Investor <span>· Money works for you</span></h4>
-          <p>Your money earns more money. This is the asset column from the last chapter.</p>
+          <p>Your money earns more money — dividends, interest and rent come in without you working for them.</p>
           <div class="ex"><b>Conventional examples</b>
             <span class="chip">Mutual funds / SIP</span><span class="chip">Rental property</span><span class="chip">Dividends</span><span class="chip">FD / SGB interest</span></div>
         </div></div>
+
+        <div class="mapbox anim">
+          <div class="mh">How this maps to income (Chapter 01)</div>
+          <div class="maprow"><span class="ql left">E</span><span class="qn">Employee <small>· you work</small></span><span class="it active">Active</span></div>
+          <div class="maprow"><span class="ql left">S</span><span class="qn">Self-employed <small>· you work</small></span><span class="it active">Active</span></div>
+          <div class="maprow"><span class="ql right">B</span><span class="qn">Business owner <small>· system works</small></span><span class="it pass">Passive</span></div>
+          <div class="maprow"><span class="ql right">I</span><span class="qn">Investor <small>· money works</small></span><span class="it port">Portfolio + passive</span></div>
+          <p class="mapfoot"><b>Left (E · S)</b> = <b>active</b> income, you work for money. <b>Right (B · I)</b> = <b>portfolio &amp; passive</b> income, money works for you. So the two chapters describe the <b>same thing</b> from two sides: Chapter 01 = the <b>income</b>, Chapter 02 = the <b>person earning it</b>.</p>
+        </div>
 
         <div class="rdpd anim">
           <span class="k">The goal <small>· Rich Dad's Cashflow Quadrant</small></span>
           <p><b>Move from the left to the right.</b> You don't have to quit your job — start small on the <b>I</b> side with a monthly SIP, so money begins working for you alongside your salary.</p>
         </div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>Same four roles, now in <b>your own words</b> — your notes on each one.</span></div>
       </div>
     </article>
 
@@ -459,6 +489,7 @@
           </ol>
         </div>
         <p class="focus-foot anim">Your note ties to the chapter before it: the red keywords show how the value shifts from <b>money</b> (E) to a <b>profit margin</b> (I) as you move toward the right side of the quadrant.</p>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>You now know <b>how income is earned</b>. Next: what to do with it — <b>saving vs investing</b>.</span></div>
       </div>
     </article>
 
@@ -513,6 +544,7 @@
           <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
           <p><b>Assets vs liabilities — judged by cashflow.</b> An asset puts cashflow <b>into</b> your pocket; a liability takes it <b>out</b>. Fund your assets before expenses — pay yourself first.</p>
         </div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>Saving and investing need tools. Next, open the <b>toolbox</b> of instruments.</span></div>
       </div>
     </article>
 
@@ -572,34 +604,7 @@
           <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
           <p><b>Build your asset column → escape the rat race.</b> When cashflow from assets covers your monthly expenses, you no longer depend on a paycheck. That point is financial freedom.</p>
         </div>
-      </div>
-    </article>
-
-    <!-- 9 · CHART -->
-    <article class="page chart">
-      <div class="sheet">
-        <span class="chap-tag anim">Chapter 06</span>
-        <h3 class="chap-title anim" style="margin-top:14px">What actually beats inflation</h3>
-        <p class="chap-lead anim">Left of the dashed line loses real value; right of it builds wealth.</p>
-
-        <div class="defn anim"><b>Inflation (பணவீக்கம்) என்றால்?</b> ஒவ்வொரு வருஷமும் பொருட்களின் விலை ~6% கூடுது. இன்னைக்கு ₹100-ல வாங்குற பொருளை, அடுத்த வருஷம் அதே ₹100-ல வாங்க முடியாது. So money-ஐ சும்மா வச்சிருந்தா அதோட value குறையும் — அதனால தான் உங்க பணம் <b>6%-க்கு மேல grow</b> ஆகணும், இல்லைனா நஷ்டம்தான்.</div>
-
-        <div class="legend anim">
-          <span><i class="sw" style="background:var(--coral)"></i>Below inflation</span>
-          <span><i class="sw" style="background:var(--green)"></i>Beats inflation</span>
-          <span><i class="sw" style="border:1px dashed var(--coral)"></i>Inflation ~6%</span>
-        </div>
-        <div class="bars anim" id="bars">
-          <div class="bar-row"><div class="bar-top"><span class="nm">Savings account</span><span class="vl">3%</span></div><div class="track"><span class="infl"></span><div class="fill below" data-pct="21.4"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">Inflation</span><span class="vl">~6%</span></div><div class="track"><span class="infl"></span><div class="fill below" data-pct="42.8" style="background:linear-gradient(90deg,#E0A06a,var(--coral))"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">Fixed Deposit</span><span class="vl">7%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="50"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">PPF</span><span class="vl">7.1%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="50.7"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">Gold / SGB</span><span class="vl">9%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="64.3"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">Real estate</span><span class="vl">9%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="64.3"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">Mutual funds / SIP</span><span class="vl">11%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="78.6"></div></div></div>
-          <div class="bar-row"><div class="bar-top"><span class="nm">Index funds / Equity</span><span class="vl">13%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="92.8"></div></div></div>
-        </div>
-        <p class="note anim">Indicative long-term / historical averages for India, for learning only — not a prediction or financial advice. Returns vary; higher returns carry higher risk. Check current rates before deciding.</p>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>Every tool is pulled by two forces. Next, meet <b>compounding &amp; inflation</b>.</span></div>
       </div>
     </article>
 
@@ -607,7 +612,7 @@
     <article class="page">
       <div class="sheet">
         <span class="chap-tag anim">The two forces</span>
-        <div class="chap-num anim">07</div>
+        <div class="chap-num anim">06</div>
         <h3 class="chap-title anim">Compounding &amp; Inflation<span class="tamil">கூட்டு வளர்ச்சி &amp; பணவீக்கம்</span></h3>
         <p class="chap-lead anim">One force quietly grows your money; the other quietly shrinks it. Tap + to open each.</p>
 
@@ -642,8 +647,39 @@
 
         <div class="rdpd anim">
           <span class="k">Lesson <small>· Rich Dad Poor Dad</small></span>
-          <p><b>Make money work for you.</b> Most people work for money for life; the shift is building money that earns while you sleep — exactly the compounding cashflow above.</p>
+          <p><b>Make money work for you.</b> Most people work for money for life; the shift is building money that earns on its own — exactly the compounding cashflow above.</p>
         </div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>So which tools actually <b>beat inflation</b>? Next, see the numbers.</span></div>
+      </div>
+    </article>
+
+    <!-- 9 · CHART -->
+    <article class="page chart">
+      <div class="sheet">
+        <span class="chap-tag anim">The evidence</span>
+        <div class="chap-num anim">07</div>
+        <h3 class="chap-title anim">What actually beats inflation</h3>
+        <p class="chap-lead anim">Left of the dashed line loses real value; right of it builds wealth.</p>
+
+        <div class="defn anim"><b>நினைவிருக்கட்டும் (quick recap):</b> inflation ஒவ்வொரு வருஷமும் ~6% பணத்தோட value-ஐ குறைக்குது. So உங்க பணம் <b>6%-க்கு மேல grow</b> ஆனா தான் உண்மையா லாபம் — கீழே உள்ள chart இதையே காட்டுது.</div>
+
+        <div class="legend anim">
+          <span><i class="sw" style="background:var(--coral)"></i>Below inflation</span>
+          <span><i class="sw" style="background:var(--green)"></i>Beats inflation</span>
+          <span><i class="sw" style="border:1px dashed var(--coral)"></i>Inflation ~6%</span>
+        </div>
+        <div class="bars anim" id="bars">
+          <div class="bar-row"><div class="bar-top"><span class="nm">Savings account</span><span class="vl">3%</span></div><div class="track"><span class="infl"></span><div class="fill below" data-pct="21.4"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Inflation</span><span class="vl">~6%</span></div><div class="track"><span class="infl"></span><div class="fill below" data-pct="42.8" style="background:linear-gradient(90deg,#E0A06a,var(--coral))"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Fixed Deposit</span><span class="vl">7%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="50"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">PPF</span><span class="vl">7.1%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="50.7"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Gold / SGB</span><span class="vl">9%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="64.3"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Real estate</span><span class="vl">9%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="64.3"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Mutual funds / SIP</span><span class="vl">11%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="78.6"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span class="nm">Index funds / Equity</span><span class="vl">13%</span></div><div class="track"><span class="infl"></span><div class="fill above" data-pct="92.8"></div></div></div>
+        </div>
+        <p class="note anim">Indicative long-term / historical averages for India, for learning only — not a prediction or financial advice. Returns vary; higher returns carry higher risk. Check current rates before deciding.</p>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>Now the action — <b>how to beat inflation</b>, step by step.</span></div>
       </div>
     </article>
 
@@ -676,7 +712,7 @@
           <div class="cap">Climb each step to stay above inflation</div>
         </div>
 
-        <div class="rung anim"><div class="no">1</div><div><h4>Emergency fund first</h4><p>6 months of expenses in an FD or liquid fund, so you never break your investments in a crisis.</p></div></div>
+        <div class="rung anim"><div class="no">1</div><div><h4>Emergency fund first</h4><p>6 months of expenses in an FD or liquid fund — your safety net before any investing begins.</p></div></div>
         <div class="rung anim"><div class="no">2</div><div><h4>Clear costly debt</h4><p>Credit cards and personal loans cost <b>15–40%</b> — no investment beats that. Kill these before investing.</p></div></div>
         <div class="rung anim"><div class="no">3</div><div><h4>Protect with insurance</h4><p>Health + term cover, so one hospital bill or setback can't wipe out your savings.</p></div></div>
         <div class="rung anim"><div class="no">4</div><div><h4>Invest above inflation</h4><p>Put the surplus to work in SIP / index funds and PPF, targeting returns <b>above ~6%</b> so money grows in real terms.</p></div></div>
@@ -684,16 +720,18 @@
 
         <div class="rdpd anim">
           <span class="k">The habit that makes it work</span>
-          <p><b>Pay yourself first, and automate it.</b> On salary day, money moves to savings and SIP <b>before</b> you spend. What you don't see, you don't spend — and your money stays ahead of inflation.</p>
+          <p><b>Automate it — don't rely on willpower.</b> On salary day, money moves to savings and SIP <b>before</b> you spend. What you don't see, you don't spend — and your money stays ahead of inflation.</p>
         </div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>Next, a <b>6-week plan</b> to learn and apply all of this.</span></div>
       </div>
     </article>
 
     <!-- · SCHEDULE -->
     <article class="page">
       <div class="sheet">
-        <span class="chap-tag anim">Chapter 09</span>
-        <h3 class="chap-title anim" style="margin-top:14px">6-week study plan<span class="tamil">படிப்பு அட்டவணை</span></h3>
+        <span class="chap-tag anim">Your plan</span>
+        <div class="chap-num anim">09</div>
+        <h3 class="chap-title anim">6-week study plan<span class="tamil">படிப்பு அட்டவணை</span></h3>
         <p class="chap-lead anim">One focused topic a week. By week 6 you'll have your own plan written.</p>
         <div class="week anim"><div class="wn">Week<b>01</b></div><div><h4>Mindset &amp; inflation</h4><p>Why money loses value; track one month of your spending.</p></div></div>
         <div class="week anim"><div class="wn">Week<b>02</b></div><div><h4>Compounding</h4><p>Returns on returns, the Rule of 72, run SIP scenarios.</p></div></div>
@@ -701,14 +739,16 @@
         <div class="week anim"><div class="wn">Week<b>04</b></div><div><h4>Investing basics</h4><p>Risk vs return, how SIPs and mutual funds work.</p></div></div>
         <div class="week anim"><div class="wn">Week<b>05</b></div><div><h4>Investment types</h4><p>Index, equity, gold, real estate — compare the chart.</p></div></div>
         <div class="week anim"><div class="wn">Week<b>06</b></div><div><h4>Build your plan</h4><p>Map goals to time, split saving vs investing, write it down.</p></div></div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>Almost done — next, <b>practice</b> the key words.</span></div>
       </div>
     </article>
 
     <!-- 8 · PRACTICE -->
     <article class="page practice">
       <div class="sheet">
-        <span class="chap-tag anim">Chapter 10</span>
-        <h3 class="chap-title anim" style="margin-top:14px">Practice words</h3>
+        <span class="chap-tag anim">Test yourself</span>
+        <div class="chap-num anim">10</div>
+        <h3 class="chap-title anim">Practice words</h3>
         <p class="hd anim">Tap a card to flip and check the meaning.</p>
         <div class="flipgrid anim">
           <div class="flip" tabindex="0"><div class="flip-in"><div class="face front"><span class="w">Compounding</span><span class="tap">Tap to flip</span></div><div class="face back"><span class="w">Compounding</span><p>Returns that earn their own returns over time.</p></div></div></div>
@@ -728,6 +768,7 @@
           <div class="q" tabindex="0"><div class="ask">₹5,000 invested into an index fund every month is an example of a…?</div><span class="reveal">Tap to reveal →</span><div class="ans">A <b>SIP</b> — and it builds your asset column.</div></div>
           <div class="q" tabindex="0"><div class="ask">FD gives 7%, inflation is 6%. What is your real return?</div><span class="reveal">Tap to reveal →</span><div class="ans">Just <b>1%</b> — return minus inflation.</div></div>
         </div>
+              <div class="nextbr anim" role="button" tabindex="0"><span class="nl">Next →</span><span>One last rule to carry with you — the <b>Rule of 72</b>.</span></div>
       </div>
     </article>
 
@@ -847,6 +888,12 @@
     const toggle=()=>q.classList.toggle('open');
     q.addEventListener('click',toggle);
     q.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+  // "Next →" bridges advance to the following chapter
+  document.querySelectorAll('.nextbr').forEach(n=>{
+    const adv=()=>go(idx+1);
+    n.addEventListener('click',adv);
+    n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();adv();}});
   });
 
   go(0);
